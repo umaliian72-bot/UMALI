@@ -1,36 +1,74 @@
-<?php include'initialize';?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Login/logout in php</title>
-        <style type="text/css">
-            .center {margin-left:auto;margin-right:auto;}
-        </style>
-    </head>
-    <body>
-        <div align="center">
-            <h4>Welcome!</h4>
-            <?php
+<head>
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-graduation-cap"></i> Student Records</h1>
+        
+        <div class="form-box">
+            <h2 id="form-title"><i class="fas fa-user-plus"></i> Add New Student</h2>
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+                
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name:</label>
+                    <input type="text" id="name" required placeholder="Enter full name">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="email" required placeholder="Enter email">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Course:</label>
+                    <input type="text" id="course" required placeholder="Enter course">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Phone:</label>
+                    <input type="text" id="phone" required placeholder="Enter phone">
+                </div>
+                
+                <div class="buttons">
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-save"></i> Save Student
+                    </button>
+                    <button type="button" class="btn-cancel" id="cancelBtn" style="display:none;">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Student List -->
+        <div class="student-list">
+            <h2><i class="fas fa-list"></i> Student Records</h2>
+            <div id="studentTable">
+                <!-- Students will appear here -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading students...
+                </div>
+            </div>
+        </div>
+    </div>
 
-            if(isset($_SESSION ['alert_message'])){
-                echo'<div align="center"> <b> <i>' .$_SESSION ['alert_mesage'].'</i> </b>
-           </div> ';
-      unset($_SESSION['alert_message']); 
-     } 
-     ?>
-     <?php if (isset($_SESSION['is_login'])):?>
-        <h3>Congratulations! You are now login.click <a hreh="logout.php">here</a>to logout</h3>
+    <!-- Confirmation Modal for Delete -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h3>
+            <p>Are you sure you want to delete this student record?</p>
+            <div class="modal-buttons">
+                <button id="confirmDelete" class="btn-delete">Yes, Delete</button>
+                <button id="cancelDelete" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-        <php elese:?>
-            <table border ="1"with="20%">
-                <tr>
-                    <td align ="center"><a href="login.php">Register</a></td>
-                </tr>
-            </table>
-
-            <br><br>
-            <?php endif;?>
-     </div>
-        </php>
-    </body>
+    <script src="script.js"></script>
+</body>
 </html>
